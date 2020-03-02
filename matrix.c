@@ -12,6 +12,7 @@
 #include <math.h>
 
 #include "matrix.h"
+// #define M_PI acos(-1.0)
 
 
 /*======== struct matrix * make_translate() ==========
@@ -22,7 +23,7 @@ Returns: The translation matrix created using x, y and z
 as the translation offsets.
 ====================*/
 struct matrix * make_translate(double x, double y, double z) {
-  struct * matrix out = new_matrix(4,4);
+  struct matrix * out = new_matrix(4,4);
   ident(out);
   out->m[0][3] = x;
   out->m[1][3] = y;
@@ -38,7 +39,7 @@ Returns: The translation matrix creates using x, y and z
 as the scale factors
 ====================*/
 struct matrix * make_scale(double x, double y, double z) {
-  struct * matrix out = new_matrix(4,4);
+  struct matrix * out = new_matrix(4,4);
   ident(out);
   out->m[0][0] = x;
   out->m[1][1] = y;
@@ -53,9 +54,9 @@ Returns: The rotation matrix created using theta as the
 angle of rotation and X as the axis of rotation.
 ====================*/
 struct matrix * make_rotX(double theta) {
-  int c = cos(theta);
-  int s = sin(theta);
-  struct * matrix out = new_matrix(4,4);
+  double c = cos((M_PI/180)*theta);
+  double s = sin((M_PI/180)*theta);
+  struct matrix * out = new_matrix(4,4);
   ident(out);
   out->m[1][1] = c;
   out->m[1][2] = -1 * s;
@@ -71,9 +72,10 @@ Returns: The rotation matrix created using theta as the
 angle of rotation and Y as the axis of rotation.
 ====================*/
 struct matrix * make_rotY(double theta) {
-  int c = cos(theta);
-  int s = sin(theta);
-  struct * matrix out = new_matrix(4,4);
+  double c = cos((M_PI/180)*theta);
+  double s = sin((M_PI/180)*theta);
+  //printf("values: %0.2f , %0.2f\n",c,s);
+  struct matrix * out = new_matrix(4,4);
   ident(out);
   out->m[0][0] = c;
   out->m[0][2] = s;
@@ -89,9 +91,10 @@ Returns: The rotation matrix created using theta as the
 angle of rotation and Z as the axis of rotation.
 ====================*/
 struct matrix * make_rotZ(double theta) {
-  int c = cos(theta);
-  int s = sin(theta);
-  struct * matrix out = new_matrix(4,4);
+  double c = cos((M_PI/180)*theta);
+  double s = sin((M_PI/180)*theta);
+  //printf("pi: %0.3f | values: %0.2f , %0.2f\n",M_PI,c,s);
+  struct matrix * out = new_matrix(4,4);
   ident(out);
   out->m[0][0] = c;
   out->m[0][1] = -1 * s;
